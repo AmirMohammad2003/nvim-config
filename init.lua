@@ -17,3 +17,4 @@ end
 
 require "lazy_setup"
 require "polish"
+vim.keymap.set("n", "<leader>r", "<cmd>CompetiTest run<cr>")

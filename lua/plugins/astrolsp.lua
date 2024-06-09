@@ -3,6 +3,7 @@
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
 --       as this provides autocomplete and documentation while editing
 
+local cmp_nvim_lsp = require "cmp_nvim_lsp"
 ---@type LazySpec
 return {
   "AstroNvim/astrolsp",
@@ -43,7 +44,13 @@ return {
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
-      -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
+      clangd = {
+        capabilities = cmp_nvim_lsp.default_capabilities(),
+        cmd = {
+          "clangd",
+          "--offset-encoding=utf-16",
+        },
+      },
     },
     -- customize how language servers are attached
     handlers = {
