@@ -1,8 +1,19 @@
--- You can also add or configure plugins by creating files in this `plugins/` folder
--- Here are some examples:
-
 ---@type LazySpec
 return {
+  {
+    "vhyrro/luarocks.nvim",
+    priority = 1000,
+    config = true,
+    opts = {
+      rocks = { "lua-curl", "nvim-nio", "mimetypes", "xml2lua" },
+    },
+  },
+  {
+    "rest-nvim/rest.nvim",
+    ft = "http",
+    dependencies = { "luarocks.nvim" },
+    config = function() require("rest-nvim").setup() end,
+  },
   {
     "xeluxee/competitest.nvim",
     dependencies = "MunifTanjim/nui.nvim",
@@ -12,15 +23,12 @@ return {
     "linux-cultist/venv-selector.nvim",
     dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap-python" },
     opts = {
-      -- Your options go here
       -- name = "venv",
       -- auto_refresh = false
     },
     event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
     keys = {
-      -- Keymap to open VenvSelector to pick a venv.
       { "<leader>vs", "<cmd>VenvSelect<cr>" },
-      -- Keymap to retrieve the venv from a cache (the one previously used for the same project directory).
       { "<leader>vc", "<cmd>VenvSelectCached<cr>" },
     },
   },
