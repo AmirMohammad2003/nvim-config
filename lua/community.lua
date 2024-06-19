@@ -8,5 +8,5 @@ return {
   { import = "astrocommunity.recipes.vscode" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.colorscheme.gruvbox-nvim" },
-  -- import/override with your plugins folder
+  { import = "astrocommunity.bars-and-lines.statuscol-nvim" },
 }

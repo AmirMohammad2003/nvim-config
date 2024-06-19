@@ -3,21 +3,37 @@ return {
   {
     "luukvbaal/statuscol.nvim",
     config = function()
-      -- local builtin = require("statuscol.builtin")
+      local builtin = require "statuscol.builtin"
       require("statuscol").setup {
-        -- relculright = true,
-        -- segments = {
-        --   { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
-        --   {
-        --     sign = { namespace = { "diagnostic/signs" }, maxwidth = 2, auto = true },
-        --     click = "v:lua.ScSa"
-        --   },
-        --   { text = { builtin.lnumfunc }, click = "v:lua.ScLa", },
-        --   {
-        --     sign = { name = { ".*" }, maxwidth = 2, colwidth = 1, auto = true, wrap = true },
-        --     click = "v:lua.ScSa"
-        --   },
-        -- }
+        setopt = true,
+        thousands = false,
+        relculright = false,
+        -- Builtin 'statuscolumn' options
+        ft_ignore = nil, -- lua table with 'filetype' values for which 'statuscolumn' will be unset
+        bt_ignore = nil, -- lua table with 'buftype' values for which 'statuscolumn' will be unset
+        -- Default segments (fold -> sign -> line number + separator), explained below
+        segments = {
+          { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
+          {
+            text = { builtin.lnumfunc, " " },
+            condition = { true, builtin.not_empty },
+            click = "v:lua.ScLa",
+          },
+          { text = { "%s" }, click = "v:lua.ScSa", colwidth = 1, maxwidth = 1 },
+        },
+        clickmod = "c", -- modifier used for certain actions in the builtin clickhandlers:
+        -- "a" for Alt, "c" for Ctrl and "m" for Meta.
+        clickhandlers = {
+          Lnum = builtin.lnum_click,
+          FoldClose = builtin.foldclose_click,
+          FoldOpen = builtin.foldopen_click,
+          FoldOther = builtin.foldother_click,
+          DapBreakpointRejected = builtin.toggle_breakpoint,
+          DapBreakpoint = builtin.toggle_breakpoint,
+          DapBreakpointCondition = builtin.toggle_breakpoint,
+          ["diagnostic/signs"] = builtin.diagnostic_click,
+          gitsigns = builtin.gitsigns_click,
+        },
       }
     end,
   },

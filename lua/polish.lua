@@ -1,3 +1,12 @@
--- This will run last in the setup process and is a good place to configure
--- things like custom filetypes. This just pure lua so anything that doesn't
--- fit in the normal config locations above can go here
+local numbertogglegroup = vim.api.nvim_create_augroup("numbertoggle", { clear = true })
+
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {
+  pattern = "*",
+  callback = function() vim.wo.relativenumber = true end,
+  group = numbertogglegroup,
+})
+vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter" }, {
+  pattern = "*",
+  callback = function() vim.wo.relativenumber = false end,
+  group = numbertogglegroup,
+})
