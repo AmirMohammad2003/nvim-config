@@ -38,6 +38,7 @@ return {
       n = {
         L = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
         H = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
+        ["<Leader>r"] = { "<cmd>CompetiTest run<cr>", desc = "run testcases" },
         ["<Leader>b"] = { desc = "Buffers" },
         ["<Leader>bD"] = {
           function()

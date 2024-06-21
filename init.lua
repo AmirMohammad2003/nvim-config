@@ -19,7 +19,6 @@ if not pcall(require, "lazy") then
   vim.cmd.quit()
 end
 
-vim.keymap.set("n", "<leader>r", "<cmd>CompetiTest run<cr>")
 require "lazy_setup"
 require "polish"
 vim.keymap.set("i", "<C-B>", 'copilot#Accept("\\<CR>")', {
