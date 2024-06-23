@@ -34,11 +34,20 @@ return {
     -- Mappings can be configured through AstroCore as well.
     -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
     mappings = {
-      -- first key is the mode
       n = {
         L = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
         H = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
-        ["<Leader>r"] = { "<cmd>CompetiTest run<cr>", desc = "run testcases" },
+        ["<Leader>r"] = { desc = "Competitive" },
+        ["<Leader>rn"] = {
+          function()
+            local filename = vim.fn.input "Filename: "
+            vim.cmd(string.format("!newc %s", filename))
+          end,
+          desc = "new",
+        },
+        ["<Leader>rr"] = { "<cmd>CompetiTest run<cr>", desc = "run testcases" },
+        ["<Leader>rt"] = { "<cmd>CompetiTest receive testcases<cr>", desc = "retrieve testcases" },
+        ["<Leader>ra"] = { "<cmd>CompetiTest add_testcase<cr>", desc = "add testcase" },
         ["<Leader>b"] = { desc = "Buffers" },
         ["<Leader>bD"] = {
           function()
