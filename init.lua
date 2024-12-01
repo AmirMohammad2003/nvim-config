@@ -21,7 +21,7 @@ end
 
 require "lazy_setup"
 require "polish"
-vim.keymap.set("i", "<C-B>", 'copilot#Accept("\\<CR>")', {
+vim.keymap.set("i", "<C-O>", 'copilot#Accept("\\<CR>")', {
   expr = true,
   replace_keycodes = false,
 })

@@ -1,4 +1,3 @@
--- don't do anything in non-vscode instances
 if not vim.g.vscode then return {} end
 
 -- a list of known working plugins with vscode-neovim, update with your own plugins
@@ -21,6 +20,7 @@ Config.options.checker.enabled = false
 Config.options.change_detection.enabled = false
 -- replace the default `cond`
 Config.options.defaults.cond = function(plugin) return vim.tbl_contains(plugins, plugin.name) end
+cmdheight = 4
 
 ---@type LazySpec
 return {

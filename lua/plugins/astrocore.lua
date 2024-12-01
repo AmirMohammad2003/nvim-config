@@ -29,6 +29,7 @@ return {
         number = true,
         spell = false,
         wrap = false,
+        scrolloff = 10,
       },
     },
     -- Mappings can be configured through AstroCore as well.
@@ -48,6 +49,7 @@ return {
         ["<Leader>rr"] = { "<cmd>CompetiTest run<cr>", desc = "run testcases" },
         ["<Leader>rt"] = { "<cmd>CompetiTest receive testcases<cr>", desc = "retrieve testcases" },
         ["<Leader>ra"] = { "<cmd>CompetiTest add_testcase<cr>", desc = "add testcase" },
+        ["<Leader>re"] = { "<cmd>CompetiTest edit_testcase<cr>", desc = "edit testcase" },
         ["<Leader>b"] = { desc = "Buffers" },
         ["<Leader>bD"] = {
           function()
@@ -56,6 +58,16 @@ return {
             )
           end,
           desc = "Pick to close",
+        },
+        ["<Leader>F"] = {
+          function()
+            if vim.opt.scrolloff._value ~= 10 then
+              vim.opt.scrolloff = 10
+            else
+              vim.opt.scrolloff = 999
+            end
+          end,
+          desc = "Keep cursor in middle",
         },
         -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
       },
