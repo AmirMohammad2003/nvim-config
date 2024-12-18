@@ -229,6 +229,22 @@ return {
 	},
 	-- copilot
 	{
+
+		"CopilotC-Nvim/CopilotChat.nvim",
+		dependencies = {
+			"zbirenbaum/copilot-cmp",
+			"zbirenbaum/copilot.lua",
+			"nvim-lua/plenary.nvim",
+		},
+		build = "make tiktoken", -- Only on MacOS or Linux
+		opts = {},
+		config = function()
+			require("CopilotChat").setup()
+			vim.keymap.set("n", "<leader>cc", "<cmd>CopilotChat<cr>")
+		end,
+	},
+
+	{
 		"zbirenbaum/copilot-cmp",
 		dependencies = {
 			{ "zbirenbaum/copilot.lua", opts = {} },
@@ -239,6 +255,8 @@ return {
 				panel = { enabled = false },
 			})
 			require("copilot_cmp").setup()
+
+			vim.keymap.set("n", "<leader>cp", "<cmd>Copilot panel<cr>")
 		end,
 	},
 }
