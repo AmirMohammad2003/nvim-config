@@ -116,8 +116,10 @@ return {
 
 			companion_port = 27121,
 			receive_print_message = true,
-			template_file = false,
-			evaluate_template_modifiers = false,
+			template_file = {
+				cpp = "~/.local/bin/template.cpp",
+			},
+			evaluate_template_modifiers = true,
 			date_format = "%c",
 			received_files_extension = "cpp",
 			received_problems_path = "$(CWD)/$(PROBLEM).$(FEXT)",
@@ -132,6 +134,7 @@ return {
 		})
 		vim.keymap.set("n", "<Leader>rr", "<cmd>CompetiTest run<cr>", { desc = "run testcases" })
 		vim.keymap.set("n", "<Leader>rt", "<cmd>CompetiTest receive testcases<cr>", { desc = "retrieve testcases" })
+		vim.keymap.set("n", "<Leader>rp", "<cmd>CompetiTest receive problem<cr>", { desc = "retrieve problem" })
 		vim.keymap.set("n", "<Leader>ra", "<cmd>CompetiTest add_testcase<cr>", { desc = "add testcase" })
 		vim.keymap.set("n", "<Leader>re", "<cmd>CompetiTest edit_testcase<cr>", { desc = "edit testcase" })
 		vim.keymap.set("n", "<Leader>rn", function()

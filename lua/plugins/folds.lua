@@ -63,15 +63,20 @@ return {
 				bt_ignore = nil, -- lua table with 'buftype' values for which 'statuscolumn' will be unset
 				segments = {
 					{
-						text = { builtin.foldfunc, " " },
+						text = { "|", builtin.foldfunc, " " },
 						click = "v:lua.ScFa",
 					},
 					{
-						text = { builtin.lnumfunc, " " },
+						text = { builtin.lnumfunc, "|" },
 						condition = { true, builtin.not_empty },
 						click = "v:lua.ScLa",
 					},
-					{ text = { "%s" }, click = "v:lua.ScSa", colwidth = 1, maxwidth = 1 },
+					{
+						text = { "%s" },
+						click = "v:lua.ScSa",
+						colwidth = 1,
+						maxwidth = 1,
+					},
 				},
 				clickmod = "c", -- modifier used for certain actions in the builtin clickhandlers:
 				-- "a" for Alt, "c" for Ctrl and "m" for Meta.

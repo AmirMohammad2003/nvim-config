@@ -62,6 +62,13 @@ return {
 							},
 						})
 					end,
+					["clangd"] = function()
+						local lspconfig = require("lspconfig")
+						lspconfig.clangd.setup({
+							capabilities = capabilities,
+							cmd = { "clangd", "--offset-encoding=utf-16" },
+						})
+					end,
 				},
 			})
 			local lspconfig_defaults = require("lspconfig").util.default_config
@@ -224,6 +231,13 @@ return {
 				python = { "isort", "black" },
 				javascript = { "prettierd", "prettier", stop_after_first = true },
 				typescript = { "prettierd", "prettier", stop_after_first = true },
+				cpp = { "my_cpp_formatter" },
+			},
+			formatters = {
+				my_cpp_formatter = {
+					command = "clang-format",
+					args = '--style="{IndentWidth: 4}"',
+				},
 			},
 		},
 	},
@@ -258,5 +272,11 @@ return {
 
 			vim.keymap.set("n", "<leader>cp", "<cmd>Copilot panel<cr>")
 		end,
+	},
+	-- autopair
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		config = true,
 	},
 }
