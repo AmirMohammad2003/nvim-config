@@ -33,3 +33,9 @@ map("n", "<S-CR>", '@="m`O<C-V><Esc>``"<CR>')
 
 map("n", "gO", "<Cmd>call append(line('.') - 1, repeat([''], v:count1))<CR>")
 map("n", "go", "<Cmd>call append(line('.'),     repeat([''], v:count1))<CR>")
+
+map("n", "<leader>x", ":.lua<cr>")
+map("v", "<leader>x", ":lua<cr>")
+map("n", "<leader><leader>x", ":source %<cr>")
+
+map("n", "<leader><leader>l", ":lua ")
