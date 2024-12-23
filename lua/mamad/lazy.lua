@@ -1,4 +1,3 @@
-require("config.opt")
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -25,9 +24,8 @@ vim.g.maplocalleader = ","
 -- Setup lazy.nvim
 require("lazy").setup({
 	spec = {
-		{ import = "plugins" },
+		{ import = "mamad.plugins" },
 	},
-	install = { colorscheme = { "gruvbox" } },
 	checker = { enabled = true },
 	change_detection = { notify = false },
 })
