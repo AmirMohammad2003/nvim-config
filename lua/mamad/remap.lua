@@ -39,3 +39,10 @@ map("v", "<leader>x", ":lua<cr>")
 map("n", "<leader><leader>x", ":source %<cr>")
 
 map("n", "<leader><leader>l", ":lua ")
+
+map("n", "<leader>tt", vim.cmd.tabnew, { desc = "New tab" })
+map("n", "<leader>tn", vim.cmd.tabnext, { desc = "Next tab" })
+map("n", "<leader>tp", vim.cmd.tabprev, { desc = "Prev tab" })
+map("n", "<leader>td", vim.cmd.tabclose, { desc = "Delete tab" })
+
+map("n", "<leader>bd", vim.cmd.bdelete, { desc = "Delete buffer" })
