@@ -19,19 +19,19 @@ return {
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			"stevearc/conform.nvim",
-			{ "williamboman/mason.nvim", config = true },
+			"williamboman/mason.nvim",
+			"jay-babu/mason-null-ls.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			"j-hui/fidget.nvim",
-			"hrsh7th/cmp-nvim-lsp",
+			"saghen/blink.cmp",
 		},
 		config = function()
-			local cmp_lsp = require("cmp_nvim_lsp")
 			local capabilities = vim.tbl_deep_extend(
 				"force",
 				{},
 				vim.lsp.protocol.make_client_capabilities(),
-				cmp_lsp.default_capabilities()
+				require("blink.cmp").get_lsp_capabilities()
 			)
 
 			require("mason").setup({})
@@ -44,7 +44,6 @@ return {
 				handlers = {
 					function(server_name)
 						require("lspconfig")[server_name].setup({
-
 							capabilities = capabilities,
 						})
 					end,
@@ -75,7 +74,7 @@ return {
 			lspconfig_defaults.capabilities = vim.tbl_deep_extend(
 				"force",
 				lspconfig_defaults.capabilities,
-				require("cmp_nvim_lsp").default_capabilities()
+				require("blink.cmp").get_lsp_capabilities()
 			)
 
 			-- This is where you enable features that only work
@@ -120,82 +119,21 @@ return {
 			})
 		end,
 	},
-
-	-- autocomplete
 	{
-		"hrsh7th/nvim-cmp",
-		version = false,
-		event = "InsertEnter",
+		"jay-babu/mason-null-ls.nvim",
+		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			-- "hrsh7th/cmp-cmdline",
-			{
-				"garymjr/nvim-snippets",
-				opts = {
-					friendly_snippets = true,
-				},
-				dependencies = { "rafamadriz/friendly-snippets" },
-			},
+			"williamboman/mason.nvim",
+			"nvimtools/none-ls.nvim",
 		},
 		config = function()
-			local cmp = require("cmp")
-			cmp.setup({
-				sources = {
-					-- Copilot Source
-					{ name = "copilot" },
-					-- Other Sources
-					{ name = "nvim_lsp" },
-					{ name = "path" },
-					{ name = "buffer" },
-					{
-						name = "lazydev",
-						group_index = 0,
-					},
-				},
-				snippet = {
-					expand = function(args)
-						vim.snippet.expand(args.body)
-					end,
-				},
-				mapping = cmp.mapping.preset.insert({
-					["<C-b>"] = cmp.mapping.scroll_docs(-4),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<CR>"] = cmp.mapping.confirm({
-						-- documentation says this is important.
-						-- I don't know why.
-						behavior = cmp.ConfirmBehavior.Replace,
-						select = false,
-					}),
-					["<Tab>"] = cmp.mapping.select_next_item(),
-					["<S-Tab>"] = cmp.mapping.select_prev_item(),
-
-					["<C-Space>"] = cmp.mapping.complete({}),
-
-					-- Think of <c-l> as moving to the right of your snippet expansion.
-					--  So if you have a snippet that's like:
-					--  function $name($args)
-					--    $body
-					--  end
-					--
-					-- <c-l> will move you to the right of each of the expansion locations.
-					-- <c-h> is similar, except moving you backwards.
-					["<C-l>"] = cmp.mapping(function()
-						if vim.snippet.active({ direction = 1 }) then
-							vim.cmd("<cmd>lua vim.snippet.jump(1)<cr>")
-						end
-					end, { "i", "s" }),
-					["<C-h>"] = cmp.mapping(function()
-						if vim.snippet.active({ direction = -1 }) then
-							vim.cmd("<cmd>lua vim.snippet.jump(-1)<cr>")
-						end
-					end, { "i", "s" }),
-				}),
-				completion = { completeopt = "menu,menuone,noinsert" },
-			})
+			require("null-ls").setup({})
 		end,
 	},
+
+	{ "nvimtools/none-ls.nvim", config = true },
+
+	{ "williamboman/mason.nvim", config = true },
 	-- Auto format
 	{
 		"stevearc/conform.nvim",
@@ -242,11 +180,12 @@ return {
 		},
 	},
 	-- copilot
+	{ "zbirenbaum/copilot.lua", opts = {} },
 	{
 
 		"CopilotC-Nvim/CopilotChat.nvim",
 		dependencies = {
-			"zbirenbaum/copilot-cmp",
+			-- "zbirenbaum/copilot-cmp",
 			"zbirenbaum/copilot.lua",
 			"nvim-lua/plenary.nvim",
 		},
@@ -257,11 +196,11 @@ return {
 			vim.keymap.set("n", "<leader>cc", "<cmd>CopilotChat<cr>")
 		end,
 	},
-
 	{
 		"zbirenbaum/copilot-cmp",
+		enabled = false,
 		dependencies = {
-			{ "zbirenbaum/copilot.lua", opts = {} },
+			"zbirenbaum/copilot.lua",
 		},
 		config = function()
 			require("copilot").setup({
