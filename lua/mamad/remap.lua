@@ -46,3 +46,6 @@ map("n", "<leader>tp", vim.cmd.tabprev, { desc = "Prev tab" })
 map("n", "<leader>td", vim.cmd.tabclose, { desc = "Delete tab" })
 
 map("n", "<leader>bd", vim.cmd.bdelete, { desc = "Delete buffer" })
+
+map("n", "<leader>|", vim.cmd.vsplit)
+map("n", "<leader>\\", vim.cmd.split)
