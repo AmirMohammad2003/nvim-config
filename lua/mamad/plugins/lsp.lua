@@ -1,19 +1,16 @@
 return {
 	-- for neovim config
 	{
-		-- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
-		-- used for completion, annotations and signatures of Neovim apis
 		"folke/lazydev.nvim",
 		ft = "lua",
 		opts = {
 			library = {
+				-- See the configuration section for more details
 				-- Load luvit types when the `vim.uv` word is found
-				{ path = "luvit-meta/library", words = { "vim%.uv" } },
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 			},
 		},
 	},
-	{ "Bilal2453/luvit-meta", lazy = true },
-
 	-- lsp configuration
 	{
 		"neovim/nvim-lspconfig",
@@ -45,20 +42,6 @@ return {
 					function(server_name)
 						require("lspconfig")[server_name].setup({
 							capabilities = capabilities,
-						})
-					end,
-					["lua_ls"] = function()
-						local lspconfig = require("lspconfig")
-						lspconfig.lua_ls.setup({
-							capabilities = capabilities,
-							settings = {
-								Lua = {
-									runtime = { version = "Lua 5.1" },
-									diagnostics = {
-										globals = { "bit", "vim", "it", "describe", "before_each", "after_each" },
-									},
-								},
-							},
 						})
 					end,
 					["clangd"] = function()
@@ -180,7 +163,18 @@ return {
 		},
 	},
 	-- copilot
-	{ "zbirenbaum/copilot.lua", opts = {} },
+	{
+		"zbirenbaum/copilot.lua",
+		opts = {},
+		config = function()
+			require("copilot").setup({
+				suggestion = { enabled = false },
+				panel = { enabled = false },
+			})
+
+			vim.keymap.set("n", "<leader>cp", "<cmd>Copilot panel<cr>")
+		end,
+	},
 	{
 
 		"CopilotC-Nvim/CopilotChat.nvim",
@@ -194,22 +188,6 @@ return {
 		config = function()
 			require("CopilotChat").setup()
 			vim.keymap.set("n", "<leader>cc", "<cmd>CopilotChat<cr>")
-		end,
-	},
-	{
-		"zbirenbaum/copilot-cmp",
-		enabled = false,
-		dependencies = {
-			"zbirenbaum/copilot.lua",
-		},
-		config = function()
-			require("copilot").setup({
-				suggestion = { enabled = false },
-				panel = { enabled = false },
-			})
-			require("copilot_cmp").setup()
-
-			vim.keymap.set("n", "<leader>cp", "<cmd>Copilot panel<cr>")
 		end,
 	},
 	-- autopair
