@@ -33,13 +33,15 @@ set.guicursor = ""
 
 set.virtualedit = "block"
 
+set.tabstop = 4
+set.softtabstop = 4
+set.shiftwidth = 4
+set.expandtab = true
+
 if vim.fn.has("nvim-0.10") == 0 then
 	set.termguicolors = true
 end
 
 vim.schedule(function()
 	set.clipboard = "unnamedplus"
-	set.tabstop = 4
-	set.shiftwidth = 4
-	set.expandtab = true
 end)
