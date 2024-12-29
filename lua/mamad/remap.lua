@@ -16,6 +16,8 @@ map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 map("i", "jk", "<esc>", { desc = "Exit insert mode" })
 map("t", "jk", "<esc>", { desc = "Exit insert mode" })
+map("i", "JK", "<esc>", { desc = "Exit insert mode" })
+map("t", "JK", "<esc>", { desc = "Exit insert mode" })
 
 map("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 map("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })

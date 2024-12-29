@@ -15,17 +15,18 @@ autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {
 	pattern = "*",
 	callback = function()
 		-- make sure we are not in terminal mode
-		if vim.bo.buftype == "terminal" then
-			return
+		if vim.bo.buftype ~= "terminal" then
+			vim.opt.relativenumber = true
 		end
-		vim.opt.relativenumber = true
 	end,
 	group = numbertogglegroup,
 })
 autocmd({ "BufLeave", "FocusLost", "InsertEnter" }, {
 	pattern = "*",
 	callback = function()
-		vim.opt.relativenumber = false
+		if vim.bo.buftype ~= "terminal" then
+			vim.opt.relativenumber = false
+		end
 	end,
 	group = numbertogglegroup,
 })
