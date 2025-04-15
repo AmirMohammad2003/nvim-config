@@ -10,7 +10,7 @@ return {
 			vim.o.foldenable = true
 			vim.o.foldlevelstart = 99
 			vim.o.foldlevel = 99
-			vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+			vim.o.fillchars = [[eob:~,fold: ,foldopen:,foldsep: ,foldclose:]]
 			vim.o.foldcolumn = "1"
 		end,
 		config = function()
@@ -58,9 +58,9 @@ return {
 				setopt = true,
 				thousands = false,
 				relculright = false,
-				-- Builtin 'statuscolumn' options
-				ft_ignore = nil, -- lua table with 'filetype' values for which 'statuscolumn' will be unset
-				bt_ignore = nil, -- lua table with 'buftype' values for which 'statuscolumn' will be unset
+
+				ft_ignore = nil,
+				bt_ignore = nil,
 				segments = {
 					{
 						text = { builtin.foldfunc },

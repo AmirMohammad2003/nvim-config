@@ -3,7 +3,7 @@ return {
 	config = function()
 		--  https://github.com/echasnovski/mini.nvim
 		require("mini.ai").setup({ n_lines = 500 })
-		require("mini.surround").setup()
+		-- require("mini.surround").setup()
 
 		-- local statusline = require("mini.statusline")
 		-- statusline.setup({ use_icons = vim.g.have_nerd_font })
@@ -19,8 +19,8 @@ return {
 		-- 	set_vim_settings = false,
 		-- 	tabpage_section = "left",
 		-- })
-		vim.keymap.set("n", "L", vim.cmd.bn, { noremap = true, silent = true })
-		vim.keymap.set("n", "H", vim.cmd.bp, { noremap = true, silent = true })
+		vim.keymap.set("n", "L", vim.cmd.bnext, { noremap = true, silent = true })
+		vim.keymap.set("n", "H", vim.cmd.bprev, { noremap = true, silent = true })
 
 		require("mini.cursorword").setup()
 	end,

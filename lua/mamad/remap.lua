@@ -14,6 +14,10 @@ end, { desc = "Keep cursor in middle" })
 
 map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
+-- map("i", "kj", "<esc>", { desc = "Exit insert mode" })
+-- map("t", "kj", "<esc>", { desc = "Exit insert mode" })
+-- map("i", "KJ", "<esc>", { desc = "Exit insert mode" })
+-- map("t", "KJ", "<esc>", { desc = "Exit insert mode" })
 map("i", "jk", "<esc>", { desc = "Exit insert mode" })
 map("t", "jk", "<esc>", { desc = "Exit insert mode" })
 map("i", "JK", "<esc>", { desc = "Exit insert mode" })
@@ -30,8 +34,8 @@ map({ "i", "x" }, "<C-S>", "<Esc><Cmd>silent! update | redraw<CR>", { desc = "Sa
 map({ "n", "x" }, "j", [[v:count == 0 ? 'gj' : 'j']], { expr = true })
 map({ "n", "x" }, "k", [[v:count == 0 ? 'gk' : 'k']], { expr = true })
 
-map("n", "<CR>", '@="m`o<C-V><Esc>``"<CR>')
-map("n", "<S-CR>", '@="m`O<C-V><Esc>``"<CR>')
+-- map("n", "<CR>", '@="m`o<C-V><Esc>``"<CR>')
+-- map("n", "<S-CR>", '@="m`O<C-V><Esc>``"<CR>')
 
 map("n", "gO", "<Cmd>call append(line('.') - 1, repeat([''], v:count1))<CR>")
 map("n", "go", "<Cmd>call append(line('.'),     repeat([''], v:count1))<CR>")
@@ -51,3 +55,25 @@ map("n", "<leader>bd", vim.cmd.bdelete, { desc = "Delete buffer" })
 
 map("n", "<leader>|", vim.cmd.vnew)
 map("n", "<leader>\\", vim.cmd.new)
+
+map("v", "<leader>p", '"_dP')
+
+map("n", "<C-u>", "<C-u>zz")
+map("n", "<C-d>", "<C-d>zz")
+
+map("n", "<leader>s", function()
+	vim.cmd("!playerctl play-pause")
+end)
+
+map({ "i", "n", "v" }, "<RIGHT>", function()
+	vim.print("use hjkl you loser")
+end)
+map({ "i", "n", "v" }, "<LEFT>", function()
+	vim.print("use hjkl you loser")
+end)
+map({ "i", "n", "v" }, "<UP>", function()
+	vim.print("use hjkl you loser")
+end)
+map({ "i", "n", "v" }, "<DOWN>", function()
+	vim.print("use hjkl you loser")
+end)

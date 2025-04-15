@@ -21,6 +21,7 @@ return {
 			"sources.default",
 		},
 		---@module 'blink.cmp'
+		---@diagnostic disable-next-line: missing-fields
 		opts = {
 			keymap = {
 				preset = "enter",
@@ -45,9 +46,8 @@ return {
 				},
 			},
 			sources = {
-				default = { "lsp", "path", "snippets", "buffer", "lazydev", "copilot" },
+				default = { "lsp", "path", "snippets", "buffer", "lazydev", "copilot", "cmdline", "omni" },
 				compat = {},
-				cmdline = {},
 				providers = {
 					copilot = {
 						name = "copilot",
