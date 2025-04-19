@@ -1,3 +1,4 @@
+local map = vim.keymap.set
 return {
 	-- for neovim config
 	{
@@ -5,8 +6,6 @@ return {
 		ft = "lua",
 		opts = {
 			library = {
-				-- See the configuration section for more details
-				-- Load luvit types when the `vim.uv` word is found
 				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 			},
 		},
@@ -40,16 +39,7 @@ return {
 			require("mason-lspconfig").setup({
 				handlers = {
 					function(server_name)
-						require("lspconfig")[server_name].setup({
-							capabilities = capabilities,
-						})
-					end,
-					["clangd"] = function()
-						local lspconfig = require("lspconfig")
-						lspconfig.clangd.setup({
-							capabilities = capabilities,
-							cmd = { "clangd", "--offset-encoding=utf-16" },
-						})
+						vim.lsp.enable(server_name)
 					end,
 				},
 			})
@@ -60,6 +50,14 @@ return {
 				require("blink.cmp").get_lsp_capabilities()
 			)
 
+			-- local hoverApi = vim.lsp.buf.hover
+			-- local hoverFunc = function(opts)
+			-- 	opts = opts or {}
+			-- 	opts.border = opts.border or "rounded"
+			-- 	return hoverApi(opts)
+			-- end
+			-- vim.lsp.buf.hover = hoverFunc
+
 			-- This is where you enable features that only work
 			-- if there is a language server active in the file
 			vim.api.nvim_create_autocmd("LspAttach", {
@@ -67,35 +65,36 @@ return {
 				callback = function(event)
 					local opts = { buffer = event.buf }
 
-					vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-					vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
-					vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
-					vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
-					vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
-					vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
-					vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-					vim.keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-					vim.keymap.set(
-						"n",
-						"<Leader>lr",
-						"<cmd>lua vim.lsp.buf.rename()<cr>",
-						{ desc = "Rename", buffer = event.buf }
-					)
+					-- map("n", "K", vim.cmd("lua vim.lsp.buf.hover()<cr>"), opts)
+
+					map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
+					map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
+					map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
+					map("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
+					map("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
+					map("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+					map("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+					map("n", "<Leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", { desc = "Rename", buffer = event.buf })
 					-- replaced by conform
-					-- vim.keymap.set('n', '<Leader>lf', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
-					vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
-					vim.keymap.set("n", "<Leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", {
+					-- map('n', '<Leader>lf', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
+					map("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+					map("n", "<Leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", {
 						desc = "Code action",
 						buffer = event.buf,
 					})
-					vim.keymap.set("n", "<Leader>ld", "<cmd>lua vim.diagnostic.open_float()<cr>", {
+					map("n", "<Leader>ld", "<cmd>lua vim.diagnostic.open_float()<cr>", {
 						desc = "Open diagnostics",
 						buffer = event.buf,
 					})
 
 					local builtin = require("telescope.builtin")
-					vim.keymap.set("n", "<leader>ls", builtin.lsp_document_symbols, {
+					map("n", "<leader>ls", builtin.lsp_document_symbols, {
 						desc = "Search document symbols",
+						buffer = event.buf,
+					})
+
+					map("n", "<leader>le", builtin.diagnostics, {
+						desc = "Search diagnostics",
 						buffer = event.buf,
 					})
 				end,
@@ -161,34 +160,6 @@ return {
 				},
 			},
 		},
-	},
-	-- copilot
-	{
-		"zbirenbaum/copilot.lua",
-		opts = {},
-		config = function()
-			require("copilot").setup({
-				suggestion = { enabled = false },
-				panel = { enabled = false },
-			})
-
-			vim.keymap.set("n", "<leader>cp", "<cmd>Copilot panel<cr>")
-		end,
-	},
-	{
-
-		"CopilotC-Nvim/CopilotChat.nvim",
-		dependencies = {
-			-- "zbirenbaum/copilot-cmp",
-			"zbirenbaum/copilot.lua",
-			"nvim-lua/plenary.nvim",
-		},
-		build = "make tiktoken", -- Only on MacOS or Linux
-		opts = {},
-		config = function()
-			require("CopilotChat").setup()
-			vim.keymap.set("n", "<leader>cc", "<cmd>CopilotChat<cr>")
-		end,
 	},
 	-- autopair
 	{

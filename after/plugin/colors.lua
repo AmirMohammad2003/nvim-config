@@ -1,5 +1,5 @@
 function SetColorScheme(color)
-	color = color or "base16-gruvbox-dark-medium"
+	-- color = color or "base16-gruvbox-dark-medium"
 	vim.cmd.colorscheme(color)
 	vim.cmd([[hi EndOfBuffer guifg=#f6db05]])
 	-- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
@@ -11,4 +11,4 @@ function SetColorScheme(color)
 	-- vim.opt.cursorlineopt = "number"
 end
 
-SetColorScheme()
+SetColorScheme("base16-rose-pine-moon")

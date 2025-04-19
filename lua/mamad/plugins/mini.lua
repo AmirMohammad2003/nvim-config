@@ -19,8 +19,6 @@ return {
 		-- 	set_vim_settings = false,
 		-- 	tabpage_section = "left",
 		-- })
-		vim.keymap.set("n", "L", vim.cmd.bnext, { noremap = true, silent = true })
-		vim.keymap.set("n", "H", vim.cmd.bprev, { noremap = true, silent = true })
 
 		require("mini.cursorword").setup()
 	end,
