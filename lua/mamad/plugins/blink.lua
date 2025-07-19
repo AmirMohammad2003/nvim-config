@@ -46,7 +46,17 @@ return {
 				},
 			},
 			sources = {
-				default = { "lsp", "path", "snippets", "buffer", "lazydev", "copilot", "cmdline", "omni" },
+				default = {
+					"lsp",
+					"easy-dotnet",
+					"path",
+					"snippets",
+					"buffer",
+					"lazydev",
+					"copilot",
+					"cmdline",
+					"omni",
+				},
 				compat = {},
 				providers = {
 					copilot = {
@@ -59,6 +69,13 @@ return {
 						name = "LazyDev",
 						module = "lazydev.integrations.blink",
 						score_offset = 100, -- show at a higher priority than lsp
+					},
+					["easy-dotnet"] = {
+						name = "easy-dotnet",
+						enabled = true,
+						module = "easy-dotnet.completion.blink",
+						score_offset = 10000,
+						async = true,
 					},
 				},
 			},
