@@ -1,4 +1,14 @@
-local map = vim.keymap.set
+local map = function(mode, lhs, rhs, opts)
+	if type(lhs) == "string" then
+		vim.keymap.set(mode, lhs, rhs, opts)
+	elseif type(lhs) == "table" then
+		for _, v in ipairs(lhs) do
+			if type(v) == "string" then
+				vim.keymap.set(mode, v, rhs, opts)
+			end
+		end
+	end
+end
 
 map("n", "<Leader>w", vim.cmd.w, { desc = "Save file" })
 map("n", "<Leader>q", vim.cmd.q, { desc = "Close file" })
@@ -18,10 +28,7 @@ map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 -- map("t", "kj", "<esc>", { desc = "Exit insert mode" })
 -- map("i", "KJ", "<esc>", { desc = "Exit insert mode" })
 -- map("t", "KJ", "<esc>", { desc = "Exit insert mode" })
-map("i", "jk", "<esc>", { desc = "Exit insert mode" })
-map("t", "jk", "<esc>", { desc = "Exit insert mode" })
-map("i", "JK", "<esc>", { desc = "Exit insert mode" })
-map("t", "JK", "<esc>", { desc = "Exit insert mode" })
+map({ "i", "t" }, { "jk", "JK" }, "<esc>", { desc = "Exit insert mode" })
 
 map("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 map("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
@@ -34,8 +41,7 @@ map({ "i", "x" }, "<C-S>", "<Esc><Cmd>silent! update | redraw<CR>", { desc = "Sa
 map({ "n", "x" }, "j", [[v:count == 0 ? 'gj' : 'j']], { expr = true })
 map({ "n", "x" }, "k", [[v:count == 0 ? 'gk' : 'k']], { expr = true })
 
--- map("n", "<CR>", '@="m`o<C-V><Esc>``"<CR>')
--- map("n", "<S-CR>", '@="m`O<C-V><Esc>``"<CR>')
+map("n", "<CR>", '@="m`o<C-V><Esc>``"<CR>')
 
 map("n", "gO", "<Cmd>call append(line('.') - 1, repeat([''], v:count1))<CR>")
 map("n", "go", "<Cmd>call append(line('.'),     repeat([''], v:count1))<CR>")
@@ -55,8 +61,8 @@ map("n", "L", vim.cmd.bnext, { noremap = true, silent = true })
 map("n", "H", vim.cmd.bprev, { noremap = true, silent = true })
 map("n", "<leader>bd", vim.cmd.bdelete, { desc = "Delete buffer" })
 
-map("n", "<leader>|", vim.cmd.vnew)
-map("n", "<leader>\\", vim.cmd.new)
+map("n", "<leader>|", vim.cmd.new)
+map("n", "<leader>\\", vim.cmd.vnew)
 
 map("v", "<leader>p", '"_dP')
 
@@ -67,15 +73,6 @@ map("n", "<leader>s", function()
 	vim.cmd("!playerctl play-pause")
 end)
 
-map({ "i", "n", "v" }, "<RIGHT>", function()
-	vim.print("use hjkl you loser")
-end)
-map({ "i", "n", "v" }, "<LEFT>", function()
-	vim.print("use hjkl you loser")
-end)
-map({ "i", "n", "v" }, "<UP>", function()
-	vim.print("use hjkl you loser")
-end)
-map({ "i", "n", "v" }, "<DOWN>", function()
+map({ "i", "n", "v" }, { "<RIGHT>", "<LEFT>", "<UP>", "<DOWN>" }, function()
 	vim.print("use hjkl you loser")
 end)
