@@ -11,4 +11,4 @@ function SetColorScheme(color)
 	-- vim.opt.cursorlineopt = "number"
 end
 
-SetColorScheme("base16-rose-pine-moon")
+SetColorScheme("base16-gruvbox-dark-medium")
