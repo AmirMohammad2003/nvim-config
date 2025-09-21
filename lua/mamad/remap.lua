@@ -73,6 +73,12 @@ map("n", "<leader>s", function()
 	vim.cmd("!playerctl play-pause")
 end)
 
+map("n", "<Leader>at", require("vstask").tasks)
+map("n", "<Leader>ai", require("vstask").inputs)
+map("n", "<Leader>aj", require("vstask").jobs)
+map("n", "<Leader>al", require("vstask").launches)
+map("n", "<Leader>ac", require("vstask").command)
+
 map({ "i", "n", "v" }, { "<RIGHT>", "<LEFT>", "<UP>", "<DOWN>" }, function()
 	vim.print("use hjkl you loser")
 end)
