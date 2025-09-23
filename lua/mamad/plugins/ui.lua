@@ -1,4 +1,4 @@
-return {
+local M = {
 	{ "j-hui/fidget.nvim", opts = {} },
 	{
 		"RRethy/base16-nvim",
@@ -15,25 +15,6 @@ return {
 		},
 	},
 	{
-		"3rd/image.nvim",
-		dependencies = { "vhyrro/luarocks.nvim" },
-		opts = {
-			backend = "kitty",
-			processor = "magick_rock",
-			hijack_file_patterns = {
-				"*.png",
-				"*.jpg",
-				"*.jpeg",
-				"*.gif",
-				"*.svg",
-				"*.bmp",
-				"*.ico",
-				"*.webp",
-				"*.avif",
-			},
-		},
-	},
-	{
 		"MeanderingProgrammer/render-markdown.nvim",
 		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
 		-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
@@ -44,3 +25,29 @@ return {
 		},
 	},
 }
+
+if os.getenv("TMUX") == nil then
+	table.insert(M, {
+		{
+			"3rd/image.nvim",
+			dependencies = { "vhyrro/luarocks.nvim" },
+			opts = {
+				backend = "kitty",
+				processor = "magick_rock",
+				hijack_file_patterns = {
+					"*.png",
+					"*.jpg",
+					"*.jpeg",
+					"*.gif",
+					"*.svg",
+					"*.bmp",
+					"*.ico",
+					"*.webp",
+					"*.avif",
+				},
+			},
+		},
+	})
+end
+
+return M

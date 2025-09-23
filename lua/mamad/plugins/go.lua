@@ -6,6 +6,9 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 	},
 	opts = {
+		lsp_inlay_hints = {
+			enable = true,
+		},
 		-- lsp_keymaps = false,
 		-- other options
 	},

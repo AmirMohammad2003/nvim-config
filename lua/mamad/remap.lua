@@ -82,3 +82,8 @@ map("n", "<Leader>ac", require("vstask").command)
 map({ "i", "n", "v" }, { "<RIGHT>", "<LEFT>", "<UP>", "<DOWN>" }, function()
 	vim.print("use hjkl you loser")
 end)
+
+map("n", "<leader>je", "<cmd>GoIfErr<cr>")
+map("n", "<leader>js", "<cmd>GoFillStruct<cr>")
+map("n", "<leader>jw", "<cmd>GoFillSwitch<cr>")
+map("n", "<leader>jp", "<cmd>GoFixPlurals<cr>")
