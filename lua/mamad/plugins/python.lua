@@ -1,3 +1,5 @@
+if vim.g.vscode then return {} end
+
 return {
 	"amirmohammad2003/venv-selector.nvim",
 	dependencies = {

@@ -1,3 +1,5 @@
+if vim.g.vscode then return {} end
+
 return {
 	"ellisonleao/gruvbox.nvim",
 	priority = 1000,

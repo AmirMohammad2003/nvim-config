@@ -1,3 +1,7 @@
+if vim.g.vscode then
+	return {}
+end
+
 function SetColorScheme(color)
 	-- color = color or "base16-gruvbox-dark-medium"
 	vim.cmd.colorscheme(color)

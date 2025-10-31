@@ -1,3 +1,7 @@
+if vim.g.vscode then
+	return {}
+end
+
 return {
 	{
 		"saghen/blink.cmp",
@@ -48,7 +52,6 @@ return {
 			sources = {
 				default = {
 					"lsp",
-					"easy-dotnet",
 					"path",
 					"snippets",
 					"buffer",

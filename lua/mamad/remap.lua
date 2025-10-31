@@ -87,3 +87,8 @@ map("n", "<leader>je", "<cmd>GoIfErr<cr>")
 map("n", "<leader>js", "<cmd>GoFillStruct<cr>")
 map("n", "<leader>jw", "<cmd>GoFillSwitch<cr>")
 map("n", "<leader>jp", "<cmd>GoFixPlurals<cr>")
+map("n", "<leader>jc", "<cmd>GoCoverage<cr>")
+
+map("n", "<M-j>", vim.cmd.cnext)
+map("n", "<M-k>", vim.cmd.cprev)
+map("n", "<M-q>", vim.cmd.cclose)

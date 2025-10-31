@@ -9,6 +9,8 @@ autocmd("TextYankPost", {
 	end,
 })
 
+if vim.g.vscode then return {} end
+
 local numbertogglegroup = augroup("numbertoggle", { clear = true })
 
 autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {

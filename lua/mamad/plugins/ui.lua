@@ -1,3 +1,5 @@
+if vim.g.vscode then return {} end
+
 local M = {
 	{ "j-hui/fidget.nvim", opts = {} },
 	{
@@ -6,14 +8,14 @@ local M = {
 			require("base16-colorscheme").setup()
 		end,
 	},
-	{
-		"vhyrro/luarocks.nvim",
-		priority = 1000, -- Very high priority is required.
-		config = true,
-		rocks = {
-			"magick",
-		},
-	},
+	-- {
+	-- 	"vhyrro/luarocks.nvim",
+	-- 	priority = 1000, -- Very high priority is required.
+	-- 	config = true,
+	-- 	rocks = {
+	-- 		"magick",
+	-- 	},
+	-- },
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
 		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
@@ -27,27 +29,27 @@ local M = {
 }
 
 if os.getenv("TMUX") == nil then
-	table.insert(M, {
-		{
-			"3rd/image.nvim",
-			dependencies = { "vhyrro/luarocks.nvim" },
-			opts = {
-				backend = "kitty",
-				processor = "magick_rock",
-				hijack_file_patterns = {
-					"*.png",
-					"*.jpg",
-					"*.jpeg",
-					"*.gif",
-					"*.svg",
-					"*.bmp",
-					"*.ico",
-					"*.webp",
-					"*.avif",
-				},
-			},
-		},
-	})
+	-- table.insert(M, {
+	-- 	{
+	-- 		"3rd/image.nvim",
+	-- 		dependencies = { "vhyrro/luarocks.nvim" },
+	-- 		opts = {
+	-- 			backend = "kitty",
+	-- 			processor = "magick_rock",
+	-- 			hijack_file_patterns = {
+	-- 				"*.png",
+	-- 				"*.jpg",
+	-- 				"*.jpeg",
+	-- 				"*.gif",
+	-- 				"*.svg",
+	-- 				"*.bmp",
+	-- 				"*.ico",
+	-- 				"*.webp",
+	-- 				"*.avif",
+	-- 			},
+	-- 		},
+	-- 	},
+	-- })
 end
 
 return M
