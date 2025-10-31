@@ -1,8 +1,10 @@
-if vim.g.vscode then return {} end
+if vim.g.vscode then
+	return {}
+end
 
 return {
 	"nvim-treesitter/nvim-treesitter",
-	dependencies = { "nvim-treesitter/nvim-treesitter-context" },
+	dependencies = { "nvim-treesitter/nvim-treesitter-context", "HiPhish/rainbow-delimiters.nvim" },
 	build = ":TSUpdate",
 	config = function()
 		local configs = require("nvim-treesitter.configs")

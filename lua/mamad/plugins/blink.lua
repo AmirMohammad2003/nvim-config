@@ -73,13 +73,6 @@ return {
 						module = "lazydev.integrations.blink",
 						score_offset = 100, -- show at a higher priority than lsp
 					},
-					["easy-dotnet"] = {
-						name = "easy-dotnet",
-						enabled = true,
-						module = "easy-dotnet.completion.blink",
-						score_offset = 10000,
-						async = true,
-					},
 				},
 			},
 		},

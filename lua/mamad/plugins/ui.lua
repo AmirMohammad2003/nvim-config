@@ -1,4 +1,6 @@
-if vim.g.vscode then return {} end
+if vim.g.vscode then
+	return {}
+end
 
 local M = {
 	{ "j-hui/fidget.nvim", opts = {} },

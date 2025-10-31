@@ -1,4 +1,6 @@
-if vim.g.vscode then return {} end
+if vim.g.vscode then
+	return {}
+end
 
 return {
 	{ "tpope/vim-sleuth" },
@@ -7,12 +9,12 @@ return {
 		main = "ibl",
 		opts = {},
 	},
-	{
-		"ThePrimeagen/vim-be-good",
-		event = "VeryLazy",
-	},
-	{
-		"eandrju/cellular-automaton.nvim",
-		event = "VeryLazy",
-	},
+	-- {
+	-- 	"ThePrimeagen/vim-be-good",
+	-- 	event = "VeryLazy",
+	-- },
+	-- {
+	-- 	"eandrju/cellular-automaton.nvim",
+	-- 	event = "VeryLazy",
+	-- },
 }

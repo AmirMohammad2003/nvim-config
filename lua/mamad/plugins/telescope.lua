@@ -10,15 +10,19 @@ return {
 		"nvim-telescope/telescope-ui-select.nvim",
 		{
 			"nvim-telescope/telescope-fzf-native.nvim",
-			build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
+			build = "make",
 		},
 	},
 	config = function()
 		local builtin = require("telescope.builtin")
 
 		vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
+		vim.keymap.set("n", "<leader>fF", function()
+			builtin.find_files({
+				cwd = vim.fn.stdpath("config"),
+			})
+		end, { desc = "Telescope find files" })
 		vim.keymap.set("n", "<leader>fp", builtin.git_files, { desc = "Telescope find in git files" })
-		vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
 		vim.keymap.set("n", "<leader>fs", function()
 			builtin.grep_string({ search = vim.fn.input("Grep > ") })
 		end, { desc = "Telescope grep string" })
@@ -33,32 +37,16 @@ return {
 		vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
 
+		require("mamad.plugins.telescope.multigrep").setup()
+
 		require("telescope").setup({
 			extensions = {
 				["ui-select"] = {
-					require("telescope.themes").get_dropdown({
-						-- even more opts
-					}),
-
-					-- pseudo code / specification for writing custom displays, like the one
-					-- for "codeactions"
-					-- specific_opts = {
-					--   [kind] = {
-					--     make_indexed = function(items) -> indexed_items, width,
-					--     make_displayer = function(widths) -> displayer
-					--     make_display = function(displayer) -> function(e)
-					--     make_ordinal = function(e) -> string
-					--   },
-					--   -- for example to disable the custom builtin "codeactions" display
-					--      do the following
-					--   codeactions = false,
-					-- }
+					require("telescope.themes").get_dropdown({}),
 				},
 				fzf = {},
 			},
 		})
-		-- To get ui-select loaded and working with telescope, you need to call
-		-- load_extension, somewhere after setup function:
 		require("telescope").load_extension("ui-select")
 		require("telescope").load_extension("vstask")
 		require("telescope").load_extension("fzf")

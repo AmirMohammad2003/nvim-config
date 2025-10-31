@@ -57,10 +57,6 @@ map("n", "<leader>tn", vim.cmd.tabnext, { desc = "Next tab" })
 map("n", "<leader>tp", vim.cmd.tabprev, { desc = "Prev tab" })
 map("n", "<leader>td", vim.cmd.tabclose, { desc = "Delete tab" })
 
-map("n", "L", vim.cmd.bnext, { noremap = true, silent = true })
-map("n", "H", vim.cmd.bprev, { noremap = true, silent = true })
-map("n", "<leader>bd", vim.cmd.bdelete, { desc = "Delete buffer" })
-
 map("n", "<leader>|", vim.cmd.new)
 map("n", "<leader>\\", vim.cmd.vnew)
 
@@ -92,3 +88,10 @@ map("n", "<leader>jc", "<cmd>GoCoverage<cr>")
 map("n", "<M-j>", vim.cmd.cnext)
 map("n", "<M-k>", vim.cmd.cprev)
 map("n", "<M-q>", vim.cmd.cclose)
+
+-- Move to previous/next
+map("n", "L", vim.cmd.bnext, { noremap = true, silent = true })
+map("n", "H", vim.cmd.bprev, { noremap = true, silent = true })
+
+-- Close buffer
+map("n", "<leader>bd", vim.cmd.bdelete, { desc = "Delete buffer" })
